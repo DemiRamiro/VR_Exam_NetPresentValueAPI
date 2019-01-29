@@ -21,8 +21,5 @@
 
         [JsonProperty("discountRateIncrement")]
         public double DiscountRateIncrement { get; set; }
-
-        [JsonProperty("timePeriod")]
-        public int TimePeriod { get; set; }
     }
 }

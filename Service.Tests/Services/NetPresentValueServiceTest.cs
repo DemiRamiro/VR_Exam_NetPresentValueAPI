@@ -4,6 +4,8 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Service.Services;
     using Service.Tests.Stubs;
+    using System.Collections.Generic;
+    using System.Linq;
 
     [TestClass]
     public class NetPresentValueServiceTest
@@ -18,22 +20,43 @@
         }
 
         [TestMethod]
-        public void Calculate_CashFlowIs100000AndDiscountRateIsFrom1To15PercentAndTimePeriodIs5Years_ReturnsNegative66478Point45()
+        public void Calculate_CashFlowIs150000AndDiscountRateIsFrom1Point2To1Point4Percent_ReturnsNegative76182Point26()
         {
-            var expected = -66478.45;
+            var expected = -76182.26;
             var npv = new NetPresentValue
             {
-                CashInflow = 100000,
-                CashOutflow = 10000,
-                DiscountRateIncrement = .0025,
-                LowerBoundDiscountRate = 0.01,
-                UpperBoundDiscountRate = 0.15,
-                TimePeriod = 5
+                Cashflow = new List<double>
+                {
+                    150000,
+                    50000,
+                    25000
+                },
+                DiscountRateIncrement = .1,
+                LowerBoundDiscountRate = 1.2,
+                UpperBoundDiscountRate = 1.4
             };
 
             var netPresentValues = this.target.Calculate(npv);
 
-            Assert.AreEqual(expected, netPresentValues["15%"]);
+            Assert.AreEqual(expected, netPresentValues.First().NetPresentValue);
+        }
+
+        [TestMethod]
+        public void CalculateNetPresentValue_CashInflow1000AndCashOutflowIs500DiscountRateIs8AndTimePeriodIs3_Returns288Point55()
+        {
+            var cashFlow = new List<double>
+            {
+                1000,
+                500,
+                500,
+                500
+            };
+            var discountRate = .08;
+            var expected = 288.55;
+
+            var actual = this.target.CalculateNetPresentValue(cashFlow, discountRate);
+
+            Assert.AreEqual(expected, actual);
         }
     }
 }

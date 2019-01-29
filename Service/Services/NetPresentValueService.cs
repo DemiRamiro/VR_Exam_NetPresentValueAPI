@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Data.Interfaces;
     using Data.Models;
@@ -25,8 +26,7 @@
             var discountRateRange = this.CalculateDiscountRateRange(lowerBoundDiscountRate, upperBoundDiscountRate, discountRateIncrement);
             foreach (var rate in discountRateRange)
             {
-                var presentValue = this.CalculatePresentValue(npv.CashOutflow, rate, npv.TimePeriod);
-                var netPresentValue = double.Parse((-npv.CashInflow + presentValue).ToString("0.##"));
+                var netPresentValue = this.CalculateNetPresentValue(npv.Cashflow, rate);
                 var percentage = rate.ToString("#0.##%");
                 yield return new NetPresentValueResult
                 {
@@ -53,15 +53,15 @@
             this.context.Delete(npv);
         }
 
-        private double CalculatePresentValue(double cashflow, double discountRate, int maxTimePeriod)
+        public double CalculateNetPresentValue(IEnumerable<double> cashflow, double discountRate)
         {
             double presentValue = 0;
-            for (int timePeriod = 1; timePeriod <= maxTimePeriod; timePeriod++)
+            foreach (var (cash, timePeriod) in cashflow.Select((c, i)=> (c, i)))
             {
-                presentValue += double.Parse((cashflow / Math.Pow(1 + discountRate, timePeriod)).ToString("0.##"));
+                presentValue += double.Parse((timePeriod == 0 ? -cash : cash / Math.Pow(1 + discountRate, timePeriod)).ToString("0.##"));
             }
 
-            return presentValue;
+            return double.Parse(presentValue.ToString("0.##"));
         }
 
         private IEnumerable<double> CalculateDiscountRateRange(double lowerBoundDiscountRate, double upperBoundDiscountRate, double discountRateIncrement)

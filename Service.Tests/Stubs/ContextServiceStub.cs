@@ -8,6 +8,11 @@
 
     public class ContextServiceStub : IContext<NetPresentValue>
     {
+        public void Delete(NetPresentValue entity)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<NetPresentValue> GetEntities(Func<NetPresentValue, bool> condition)
         {
             throw new NotImplementedException();

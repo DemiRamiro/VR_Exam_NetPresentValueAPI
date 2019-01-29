@@ -7,6 +7,8 @@
 
     public interface INetPresentValueService
     {
+        double CalculateNetPresentValue(IEnumerable<double> cashflow, double rate);
+
         IEnumerable<NetPresentValueResult> Calculate(NetPresentValue npv);
 
         Task InsertNPVAsync(NetPresentValue netPresentValue);
