@@ -25,11 +25,11 @@
             var expected = -76182.26;
             var npv = new NetPresentValue
             {
-                Cashflow = new List<double>
+                CashFlows = new List<CashFlow>
                 {
-                    150000,
-                    50000,
-                    25000
+                    new CashFlow{ CashFlowValue = 150000 },
+                    new CashFlow{ CashFlowValue = 50000 },
+                    new CashFlow{ CashFlowValue = 25000 }
                 },
                 DiscountRateIncrement = .1,
                 LowerBoundDiscountRate = 1.2,

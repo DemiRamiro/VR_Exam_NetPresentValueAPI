@@ -12,7 +12,9 @@
             Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<NetPresentValueView, NetPresentValue>();
+                cfg.CreateMap<CashFlowView, CashFlow>();
                 cfg.CreateMap<NetPresentValue, NetPresentValueView>();
+                cfg.CreateMap<CashFlow, CashFlowView>();
                 cfg.CreateMap<NetPresentValueResult, NetPresentValueResultView>();
             });
         }

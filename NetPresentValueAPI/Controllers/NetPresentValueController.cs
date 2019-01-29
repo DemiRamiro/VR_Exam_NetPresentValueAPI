@@ -1,5 +1,6 @@
 ﻿namespace NetPresentValueAPI.Controllers
 {
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -23,11 +24,19 @@
         [Route("api/netpresentvalue/save")]
         public async Task<IHttpActionResult> CalculateAndSave([FromBody]NetPresentValueView netPresentValueView)
         {
-            var npv = Mapper.Map<NetPresentValueView, NetPresentValue>(netPresentValueView);
-            var netPresentValues = this.netPresentValueService.Calculate(npv);
-            var result = Mapper.Map<IEnumerable<NetPresentValueResult>, IEnumerable<NetPresentValueResultView>>(netPresentValues);
-            await this.netPresentValueService.InsertNPVAsync(npv);
-            return this.Ok(result);
+            try
+            {
+                var npv = Mapper.Map<NetPresentValueView, NetPresentValue>(netPresentValueView);
+                var netPresentValues = this.netPresentValueService.Calculate(npv);
+                var result = Mapper.Map<IEnumerable<NetPresentValueResult>, IEnumerable<NetPresentValueResultView>>(netPresentValues);
+                await this.netPresentValueService.InsertNPVAsync(npv);
+                return this.Ok(result);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
         [HttpPost]

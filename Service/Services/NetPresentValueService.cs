@@ -26,7 +26,7 @@
             var discountRateRange = this.CalculateDiscountRateRange(lowerBoundDiscountRate, upperBoundDiscountRate, discountRateIncrement);
             foreach (var rate in discountRateRange)
             {
-                var netPresentValue = this.CalculateNetPresentValue(npv.Cashflow, rate);
+                var netPresentValue = this.CalculateNetPresentValue(npv.CashFlows.Select(c => c.CashFlowValue), rate);
                 var percentage = rate.ToString("#0.##%");
                 yield return new NetPresentValueResult
                 {

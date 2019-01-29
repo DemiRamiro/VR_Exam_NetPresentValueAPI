@@ -4,7 +4,7 @@
 
     public class NetPresentValue : SqlEntity
     {
-        public IEnumerable<double> Cashflow { get; set; }
+        public virtual IEnumerable<CashFlow> CashFlows { get; set; }
 
         public double LowerBoundDiscountRate { get; set; }
 

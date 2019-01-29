@@ -58,7 +58,16 @@
     <Compile Include="Migrations\201901261355446_AddedCreateAndUpdatedDate.Designer.cs">
       <DependentUpon>201901261355446_AddedCreateAndUpdatedDate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901291618238_UpdatedNetPresentValue.cs" />
+    <Compile Include="Migrations\201901291618238_UpdatedNetPresentValue.Designer.cs">
+      <DependentUpon>201901291618238_UpdatedNetPresentValue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901291622248_AddedCashFlows.cs" />
+    <Compile Include="Migrations\201901291622248_AddedCashFlows.Designer.cs">
+      <DependentUpon>201901291622248_AddedCashFlows.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\CashFlow.cs" />
     <Compile Include="Models\NetPresentValue.cs" />
     <Compile Include="Models\SqlEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -73,6 +82,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901261355446_AddedCreateAndUpdatedDate.resx">
       <DependentUpon>201901261355446_AddedCreateAndUpdatedDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901291618238_UpdatedNetPresentValue.resx">
+      <DependentUpon>201901291618238_UpdatedNetPresentValue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901291622248_AddedCashFlows.resx">
+      <DependentUpon>201901291622248_AddedCashFlows.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

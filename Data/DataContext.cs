@@ -10,5 +10,7 @@
 
         }
         public virtual DbSet<NetPresentValue> NetPresentValues { get; set; }
+
+        public virtual DbSet<CashFlow> CashFlows { get; set; }
     }
 }
