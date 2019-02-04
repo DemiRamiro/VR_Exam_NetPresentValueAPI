@@ -20,11 +20,10 @@
         public IEnumerable<NetPresentValueResult> Calculate(NetPresentValue npv)
         {
             var netPresentValues = new Dictionary<string, double>();
-            var lowerBoundDiscountRate = npv.LowerBoundDiscountRate / 100;
-            var upperBoundDiscountRate = npv.UpperBoundDiscountRate / 100;
-            var discountRateIncrement = npv.DiscountRateIncrement / 100;
-            var discountRateRange = this.CalculateDiscountRateRange(lowerBoundDiscountRate, upperBoundDiscountRate, discountRateIncrement);
-            foreach (var rate in discountRateRange)
+            var lowerBoundDiscountRate = double.Parse((npv.LowerBoundDiscountRate / 100).ToString("0.####"));
+            var upperBoundDiscountRate = double.Parse((npv.UpperBoundDiscountRate / 100).ToString("0.####"));
+            var discountRateIncrement = double.Parse((npv.DiscountRateIncrement / 100).ToString("0.####"));
+            foreach (var rate in this.CalculateDiscountRateRange(lowerBoundDiscountRate, upperBoundDiscountRate, discountRateIncrement))
             {
                 var netPresentValue = this.CalculateNetPresentValue(npv.CashFlows.Select(c => c.CashFlowValue), rate);
                 var percentage = rate.ToString("#0.##%");

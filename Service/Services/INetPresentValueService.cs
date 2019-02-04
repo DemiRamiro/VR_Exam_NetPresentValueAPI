@@ -7,7 +7,7 @@
 
     public interface INetPresentValueService
     {
-        double CalculateNetPresentValue(IEnumerable<double> cashflow, double rate);
+        double CalculateNetPresentValue(IEnumerable<double> cashflow, double discountRate);
 
         IEnumerable<NetPresentValueResult> Calculate(NetPresentValue npv);
 
